@@ -3,7 +3,8 @@ namespace QB.SDK;
 
 public class ARRefundCreditCardAdd : QBRequest
 {
-    public ListRef? CustomerRef { get; set; }
+    public string? defMacro { get; set; }
+    public required ListRef CustomerRef { get; set; }
     public ListRef? RefundFromAccountRef { get; set; }
     public ListRef? ARAccountRef { get; set; }
     public DateOnly? TxnDate { get; set; }
@@ -19,7 +20,6 @@ public class ARRefundCreditCardAdd : QBRequest
     public override XElement ToQBXML()
     {
         var rq = new XElement(nameof(ARRefundCreditCardAdd))
-            .AppendAttribute(requestID)
             .Append(CustomerRef)
             .Append(RefundFromAccountRef)
             .Append(ARAccountRef)
@@ -34,6 +34,8 @@ public class ARRefundCreditCardAdd : QBRequest
             .Append(RefundAppliedToTxnAdd);
 
         return new XElement($"{nameof(ARRefundCreditCardAdd)}Rq")
+            .AppendAttribute(requestID)
+            .AppendAttribute(defMacro)
             .Append(rq);
     }
 }
