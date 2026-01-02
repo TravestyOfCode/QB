@@ -1,6 +1,4 @@
-﻿using System.Xml.Schema;
-
-namespace QB.Tests;
+﻿namespace QB.Tests;
 
 public class QBXMLSchemaFixture
 {

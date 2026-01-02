@@ -1,5 +1,4 @@
 ﻿using QB.SDK;
-using System.Xml.Schema;
 
 namespace QB.Tests;
 
