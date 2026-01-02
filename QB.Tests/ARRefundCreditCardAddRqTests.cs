@@ -10,6 +10,7 @@ public class ARRefundCreditCardAddRqTests(QBXMLSchemaFixture fixture) : IClassFi
         // Arrange
         var addRq = new ARRefundCreditCardAdd()
         {
+            CustomerRef = "Customer",
             ARAccountRef = "Accounts Receivable",
             TxnDate = new DateOnly(2025, 12, 31),
             RefundAppliedToTxnAdd =
