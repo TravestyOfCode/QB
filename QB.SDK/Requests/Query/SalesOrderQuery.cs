@@ -7,12 +7,12 @@ public class SalesOrderQuery : QueryRq, IQBXML
     public List<string>? TxnID { get; set; }
     public List<string>? RefNumber { get; set; }
     public List<string>? RefNumberCaseSensitive { get; set; }
-    public ModifiedDateRangeFilter? ModifiedDateRangeFilter { get; set; }
-    public TxnDateRangeFilter? TxnDateRangeFilter { get; set; }
-    public EntityFilter? EntityFilter { get; set; }
-    public RefNumberFilter? RefNumberFilter { get; set; }
-    public RefNumberRangeFilter? RefNumberRangeFilter { get; set; }
-    public CurrencyFilter? CurrencyFilter { get; set; }
+    public DateTimeRangeFilter? ModifiedDateRangeFilter { get; set; }
+    public DateRangeFilter? TxnDateRangeFilter { get; set; }
+    public ParentListFilter? EntityFilter { get; set; }
+    public StringFilter? RefNumberFilter { get; set; }
+    public StringRangeFilter? RefNumberRangeFilter { get; set; }
+    public ListFilter? CurrencyFilter { get; set; }
     public bool? IncludeLineItems { get; set; }
     public bool? IncludeLinkedTxns { get; set; }
     public List<string>? OwnerID { get; set; }
@@ -52,7 +52,7 @@ public class SalesOrderQuery : QueryRq, IQBXML
 
     public static SalesOrderQuery ByTxnIDs(IEnumerable<string> txnIDs)
     {
-        return new() { TxnID = txnIDs.ToList() };
+        return new() { TxnID = [.. txnIDs] };
     }
 
     public static SalesOrderQuery ByTxnID(string txnID)
@@ -99,7 +99,7 @@ public static class SalesOrderQueryExtensions
         }
 
         // Return the SalesOrder if we have only one, otherwise throw an exception.
-        return soResponse.Results?.Count() switch
+        return soResponse.Results?.Count switch
         {
             null => throw new InvalidOperationException("The SalesOrder response list was null."),
             0 => throw new InvalidOperationException("The SalesOrder response list was empty."),
@@ -126,7 +126,7 @@ public static class SalesOrderQueryExtensions
         }
 
         // Return the SalesOrder if we have only one, otherwise throw an exception.
-        return soResponse.Results?.Count() switch
+        return soResponse.Results?.Count switch
         {
             null => throw new InvalidOperationException("The SalesOrder response list was null."),
             0 => throw new InvalidOperationException("The SalesOrder response list was empty."),
