@@ -16,4 +16,34 @@ public class SalesOrderLine : SalesOrderLineBase
     public bool? IsManuallyClosed { get; set; }
     public string? Other1 { get; set; }
     public string? Other2 { get; set; }
+
+    internal override SalesOrderLineMod ToMod()
+    {
+        // Check for required property
+        TxnLineID.ThrowIfNullOrWhiteSpace();
+
+        return new SalesOrderLineMod()
+        {
+            TxnLineID = TxnLineID,
+            ItemRef = ItemRef,
+            Desc = Desc,
+            Quantity = Quantity,
+            UnitOfMeasure = UnitOfMeasure,
+            OverrideUOMSetRef = OverrideUOMSetRef,
+            Rate = Rate,
+            RatePercent = RatePercent,
+            //PriceLevelRef = PriceLevelRef,
+            ClassRef = ClassRef,
+            Amount = Amount,
+            //OptionForPriceRuleConflict = OptionForPriceRuleConflict,
+            InventorySiteRef = InventorySiteRef,
+            InventorySiteLocationRef = InventorySiteLocationRef,
+            SerialNumber = SerialNumber,
+            LotNumber = LotNumber,
+            SalesTaxCodeRef = SalesTaxCodeRef,
+            IsManuallyClosed = IsManuallyClosed,
+            Other1 = Other1,
+            Other2 = Other2
+        };
+    }
 }

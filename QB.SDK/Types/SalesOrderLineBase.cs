@@ -8,4 +8,6 @@ public abstract class SalesOrderLineBase
     public string? UnitOfMeasure { get; set; }
     public ListRef? OverrideUOMSetRef { get; set; }
     public List<DataExt>? DataExtRet { get; set; }
+
+    internal abstract SalesOrderLineModBase ToMod();
 }

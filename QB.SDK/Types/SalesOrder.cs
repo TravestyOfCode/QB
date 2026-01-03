@@ -1,4 +1,6 @@
-﻿namespace QB.SDK;
+﻿using System.Linq;
+
+namespace QB.SDK;
 
 public class SalesOrder
 {
@@ -44,4 +46,43 @@ public class SalesOrder
     [XmlElement("SalesOrderLineGroupRet", typeof(SalesOrderLineGroup))]
     public List<SalesOrderLineBase>? SalesOrderLines { get; set; }
     public List<DataExt>? DataExtRet { get; set; }
+
+    public SalesOrderMod ToMod()
+    {
+        // Check for null on required Mod properties.
+        TxnID.ThrowIfNullOrWhiteSpace();
+        EditSequence.ThrowIfNullOrWhiteSpace();
+
+        // Generate the Mod request.
+        return new SalesOrderMod()
+        {
+            TxnID = TxnID,
+            EditSequence = EditSequence,
+            CustomerRef = CustomerRef,
+            ClassRef = ClassRef,
+            TemplateRef = TemplateRef,
+            TxnDate = TxnDate,
+            RefNumber = RefNumber,
+            BillAddress = BillAddress,
+            ShipAddress = ShipAddress,
+            PONumber = PONumber,
+            TermsRef = TermsRef,
+            DueDate = DueDate,
+            SalesRepRef = SalesRepRef,
+            FOB = FOB,
+            ShipDate = ShipDate,
+            ShipMethodRef = ShipMethodRef,
+            ItemSalesTaxRef = ItemSalesTaxRef,
+            IsManuallyClosed = IsManuallyClosed,
+            Memo = Memo,
+            CustomerMsgRef = CustomerMsgRef,
+            IsToBePrinted = IsToBePrinted,
+            IsToBeEmailed = IsToBeEmailed,
+            IsTaxIncluded = IsTaxIncluded,
+            CustomerSalesTaxCodeRef = CustomerSalesTaxCodeRef,
+            Other = Other,
+            ExchangeRate = ExchangeRate,
+            SalesOrderLineMod = SalesOrderLines?.Select(l => l.ToMod()).ToList()
+        };
+    }
 }
