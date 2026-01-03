@@ -4,7 +4,7 @@ namespace QB.SDK;
 public class SalesOrderMod : QBRequest
 {
     public required string TxnID { get; set; }
-    public string? EditSequence { get; set; }
+    public required string EditSequence { get; set; }
     public ListRef? CustomerRef { get; set; }
     public ListRef? ClassRef { get; set; }
     public ListRef? TemplateRef { get; set; }
