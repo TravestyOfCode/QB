@@ -2,11 +2,13 @@
 
 public class AdditionalNote : IQBXMLNamed
 {
+    public int? NoteID { get; set; }
     public required string Note { get; set; }
 
     public XElement ToQBXML(string name = nameof(AdditionalNote))
     {
         return new XElement(name)
+            .Append(NoteID)
             .Append(Note);
     }
 
