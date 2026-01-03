@@ -1,6 +1,6 @@
 ﻿using QB.SDK;
 
-namespace QB.Tests.SalesOrder;
+namespace QB.Tests.SalesOrders;
 
 public class SalesOrderModRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {

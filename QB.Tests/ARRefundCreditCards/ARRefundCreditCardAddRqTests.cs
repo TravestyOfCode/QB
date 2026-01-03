@@ -1,22 +1,22 @@
 ﻿using QB.SDK;
 
-namespace QB.Tests.Bill;
+namespace QB.Tests.ARRefundCreditCards;
 
-public class BillAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
+public class ARRefundCreditCardAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {
     [Fact]
     public void GeneratesCorrectRequestString()
     {
         // Arrange
-        var addRq = new BillAdd()
+        var addRq = new ARRefundCreditCardAdd()
         {
-            VendorRef = "Vendor",
-            TxnDate = new DateOnly(2025, 12, 27),
-            RefNumber = "12345",
-            ItemLines =
+            CustomerRef = "Customer",
+            ARAccountRef = "Accounts Receivable",
+            TxnDate = new DateOnly(2025, 12, 31),
+            RefundAppliedToTxnAdd =
             [
-                new ItemLineAdd() { ItemRef = "Materials", Desc = "12345 - Vendor", Amount = 100m, CustomerRef = "Customer", BillableStatus = BillableStatus.Billable }
-                ]
+                new RefundAppliedToTxnAdd(){ RefundAmount = 100m , TxnID = "123abc" }
+            ]
         };
 
         var rq = new QBXMLRequest([addRq]);

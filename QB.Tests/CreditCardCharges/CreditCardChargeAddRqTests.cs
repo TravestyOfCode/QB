@@ -1,6 +1,6 @@
 using QB.SDK;
 
-namespace QB.Tests.CreditCardCharge;
+namespace QB.Tests.CreditCardCharges;
 
 public class CreditCardChargeAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {
