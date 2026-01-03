@@ -10,13 +10,14 @@ public class SalesOrderModRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QB
         // Arrange
         var rq = new SalesOrderMod()
         {
+            TxnID = "123ABC",
             CustomerRef = "TestCustomer",
             TxnDate = new DateOnly(2025, 12, 27),
             RefNumber = "12345",
             SalesOrderLineMod =
             [
-                new SalesOrderLineMod(){ ItemRef = "Item", Amount = 100.0m },
-                new SalesOrderLineGroupMod() { ItemGroupRef = "A" }
+                new SalesOrderLineMod(){ TxnLineID = "ABC123", ItemRef = "Item", Amount = 100.0m },
+                new SalesOrderLineGroupMod() { TxnLineID = "-1", ItemGroupRef = "A" }
             ]
         };
 
