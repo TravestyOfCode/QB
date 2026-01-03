@@ -2,9 +2,9 @@
 
 public class SalesOrderQuery : QueryRq, IQBXML
 {
-    public string? TxnID { get; set; }
-    public string? RefNumber { get; set; }
-    public string? RefNumberCaseSensitive { get; set; }
+    public List<string>? TxnID { get; set; }
+    public List<string>? RefNumber { get; set; }
+    public List<string>? RefNumberCaseSensitive { get; set; }
     public ModifiedDateRangeFilter? ModifiedDateRangeFilter { get; set; }
     public TxnDateRangeFilter? TxnDateRangeFilter { get; set; }
     public EntityFilter? EntityFilter { get; set; }
@@ -13,7 +13,7 @@ public class SalesOrderQuery : QueryRq, IQBXML
     public CurrencyFilter? CurrencyFilter { get; set; }
     public bool? IncludeLineItems { get; set; }
     public bool? IncludeLinkedTxns { get; set; }
-    public string? OwnerID { get; set; }
+    public List<string>? OwnerID { get; set; }
 
     public override XElement ToQBXML()
     {
@@ -34,6 +34,7 @@ public class SalesOrderQuery : QueryRq, IQBXML
             .Append(CurrencyFilter)
             .Append(IncludeLineItems)
             .Append(IncludeLinkedTxns)
+            .Append(IncludeRetElement)
             .Append(OwnerID);
     }
 }
