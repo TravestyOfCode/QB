@@ -1,23 +1,22 @@
 ﻿using QB.SDK;
 
-namespace QB.Tests;
+namespace QB.Tests.Bill;
 
-public class SalesOrderAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
+public class BillAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {
     [Fact]
     public void GeneratesCorrectRequestString()
     {
         // Arrange
-        var addRq = new SalesOrderAdd()
+        var addRq = new BillAdd()
         {
-            CustomerRef = "TestCustomer",
+            VendorRef = "Vendor",
             TxnDate = new DateOnly(2025, 12, 27),
             RefNumber = "12345",
-            SalesOrderLineAdd =
+            ItemLines =
             [
-                new SalesOrderLineAdd(){ ItemRef = "Item", Amount = 100.0m },
-                new SalesOrderLineGroupAdd() { ItemGroupRef = "A" }
-            ]
+                new ItemLineAdd() { ItemRef = "Materials", Desc = "12345 - Vendor", Amount = 100m, CustomerRef = "Customer", BillableStatus = BillableStatus.Billable }
+                ]
         };
 
         var rq = new QBXMLRequest([addRq]);

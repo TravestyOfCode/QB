@@ -1,6 +1,6 @@
 ﻿using QB.SDK;
 
-namespace QB.Tests;
+namespace QB.Tests.ARRefundCreditCard;
 
 public class ARRefundCreditCardAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {

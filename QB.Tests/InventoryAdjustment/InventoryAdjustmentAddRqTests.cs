@@ -1,6 +1,6 @@
 ﻿using QB.SDK;
 
-namespace QB.Tests;
+namespace QB.Tests.InventoryAdjustment;
 
 public class InventoryAdjustmentAddRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLSchemaFixture>
 {
