@@ -11,6 +11,7 @@ public class SalesOrderModRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QB
         var rq = new SalesOrderMod()
         {
             TxnID = "123ABC",
+            EditSequence = "AAAAA",
             CustomerRef = "TestCustomer",
             TxnDate = new DateOnly(2025, 12, 27),
             RefNumber = "12345",
