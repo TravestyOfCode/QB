@@ -1,6 +1,6 @@
 ﻿namespace QB.SDK;
 
-public class Address
+public class Address : IQBXMLNamed
 {
     public string? Addr1 { get; set; }
     public string? Addr2 { get; set; }
@@ -26,18 +26,6 @@ public class Address
             .Append(PostalCode)
             .Append(Country)
             .Append(Note);
-    }
-}
-
-internal static class AddressExtensions
-{
-    public static XElement Append(this XElement element, Address? value, [CallerArgumentExpression(nameof(value))] string name = nameof(Address))
-    {
-        if (value != null)
-        {
-            element.Add(value.ToQBXML(name));
-        }
-        return element;
     }
 }
 
