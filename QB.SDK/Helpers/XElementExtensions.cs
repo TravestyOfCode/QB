@@ -58,20 +58,7 @@ internal static class XElementExtensions
         }
         return element;
     }
-    public static XElement Append<T>(this XElement element, T value, [CallerArgumentExpression(nameof(value))] string name = "") where T : struct, Enum
-    {
-        element.Add(new XElement(name, value.ToString()));
-        return element;
-    }
-    public static XElement Append<T>(this XElement element, T? value, [CallerArgumentExpression(nameof(value))] string name = "") where T : struct, Enum
-    {
-        if (value != null)
-        {
-            element.Add(new XElement(name, value.ToString()));
-        }
-        return element;
-    }
-    public static XElement Append(this XElement element, List<string>? values, [CallerArgumentExpression(nameof(values))] string name = "")
+    public static XElement Append(this XElement element, IEnumerable<string>? values, [CallerArgumentExpression(nameof(values))] string name = "")
     {
         if (values != null)
         {
@@ -98,6 +85,39 @@ internal static class XElementExtensions
         }
         return element;
     }
+    public static XElement Append(this XElement element, IQBXMLNamed? value, [CallerArgumentExpression(nameof(value))] string name = "")
+    {
+        if (value != null)
+        {
+            element.Add(value.ToQBXML(name));
+        }
+        return element;
+    }
+    public static XElement Append(this XElement element, IEnumerable<IQBXMLNamed>? values, [CallerArgumentExpression(nameof(values))] string name = "")
+    {
+        if (values != null)
+        {
+            foreach (var value in values)
+            {
+                element.Add(value.ToQBXML(name));
+            }
+        }
+        return element;
+    }
+    public static XElement Append<T>(this XElement element, T value, [CallerArgumentExpression(nameof(value))] string name = "") where T : struct, Enum
+    {
+        element.Add(new XElement(name, value.ToString()));
+        return element;
+    }
+    public static XElement Append<T>(this XElement element, T? value, [CallerArgumentExpression(nameof(value))] string name = "") where T : struct, Enum
+    {
+        if (value != null)
+        {
+            element.Add(new XElement(name, value.ToString()));
+        }
+        return element;
+    }
+
 
     public static XElement AppendAttribute(this XElement element, string? value, [CallerArgumentExpression(nameof(value))] string name = "")
     {
