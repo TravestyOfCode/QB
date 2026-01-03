@@ -2,7 +2,7 @@
 
 public abstract class SalesOrderLineModBase
 {
-    public string? TxnLineID { get; set; }
+    public required string TxnLineID { get; set; }
     public decimal? Quantity { get; set; }
     public string? UnitOfMeasure { get; set; }
 
