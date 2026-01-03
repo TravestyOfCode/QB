@@ -2,7 +2,7 @@
 
 public class CustomerAdd : QBRequest
 {
-    public string? Name { get; set; }
+    public required string Name { get; set; }
     public bool? IsActive { get; set; }
     public ListRef? ClassRef { get; set; }
     public ListRef? ParentRef { get; set; }
