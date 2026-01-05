@@ -85,6 +85,17 @@ internal static class XElementExtensions
         }
         return element;
     }
+    public static XElement Append(this XElement element, IEnumerable<IQBXML>? values)
+    {
+        if (values != null)
+        {
+            foreach (var value in values)
+            {
+                element.Add(value.ToQBXML());
+            }
+        }
+        return element;
+    }
     public static XElement Append(this XElement element, IQBXMLNamed? value, [CallerArgumentExpression(nameof(value))] string name = "")
     {
         if (value != null)
