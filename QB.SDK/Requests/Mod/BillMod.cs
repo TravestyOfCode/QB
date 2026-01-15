@@ -1,6 +1,6 @@
 ﻿namespace QB.SDK;
 
-public class BillMod : QueryRq, IQBXML
+public class BillMod : QBRequest, IQBXML
 {
     /// <summary>
     /// QuickBooks generates a unique TxnID for each transaction that is added to QuickBooks. 
