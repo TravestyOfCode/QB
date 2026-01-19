@@ -31,6 +31,10 @@ public class SalesOrderMod : QBRequest
     public float? ExchangeRate { get; set; }
     public List<SalesOrderLineModBase>? SalesOrderLineMod { get; set; }
 
+    /// <summary>
+    /// Converts the object to a XElement represenation according to the QBXML specification.
+    /// </summary>
+    /// <returns>A XElement respresentation of the object.</returns>
     public override XElement ToQBXML()
     {
         var rq = new XElement(nameof(SalesOrderMod))

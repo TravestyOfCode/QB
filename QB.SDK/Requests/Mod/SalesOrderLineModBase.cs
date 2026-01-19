@@ -6,6 +6,10 @@ public abstract class SalesOrderLineModBase
     public decimal? Quantity { get; set; }
     public string? UnitOfMeasure { get; set; }
 
+    /// <summary>
+    /// Converts the object to a XElement represenation according to the QBXML specification.
+    /// </summary>
+    /// <returns>A XElement respresentation of the object.</returns>
     public abstract XElement ToQBXML();
 }
 

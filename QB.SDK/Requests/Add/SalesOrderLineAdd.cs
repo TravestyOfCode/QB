@@ -17,6 +17,10 @@ public class SalesOrderLineAdd : SalesOrderLineAddBase
     public string? Other1 { get; set; }
     public string? Other2 { get; set; }
 
+    /// <summary>
+    /// Converts the object to a XElement represenation according to the QBXML specification.
+    /// </summary>
+    /// <returns>A XElement respresentation of the object.</returns>
     public override XElement ToQBXML()
     {
         return new XElement(nameof(SalesOrderLineAdd))

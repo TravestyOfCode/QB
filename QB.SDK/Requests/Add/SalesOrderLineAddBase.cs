@@ -8,6 +8,10 @@ public abstract class SalesOrderLineAddBase
     public ListRef? InventorySiteLocationRef { get; set; }
     public List<DataExt>? DataExt { get; set; }
 
+    /// <summary>
+    /// Converts the object to a XElement represenation according to the QBXML specification.
+    /// </summary>
+    /// <returns>A XElement respresentation of the object.</returns>
     public abstract XElement ToQBXML();
 }
 
