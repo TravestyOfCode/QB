@@ -11,6 +11,13 @@ public abstract class SalesOrderLineModBase
     /// </summary>
     /// <returns>A XElement respresentation of the object.</returns>
     public abstract XElement ToQBXML();
+
+    /// <summary>
+    /// Converts a SalesOrderLineBase into a Mod request line.
+    /// </summary>
+    /// <param name="line">The SalesOrderLineBase to convert.</param>
+    /// <returns>Either a SalesOrderLineMod or SalesOrderLineGroupMod depending on the type of line.</returns>
+    public abstract SalesOrderLineModBase ToMod(SalesOrderLineBase lineBase);
 }
 
 internal static class SalesOrderLineModBaseExtensions

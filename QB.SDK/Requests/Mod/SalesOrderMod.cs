@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace QB.SDK;
 
 public class SalesOrderMod : QBRequest
@@ -70,5 +72,47 @@ public class SalesOrderMod : QBRequest
             .AppendAttribute(requestID)
             .Append(rq)
             .Append(IncludeRetElement);
+    }
+}
+
+public static class SalesOrderModExtensions
+{
+    public static SalesOrderMod ToMod(SalesOrder so)
+    {
+        // Null checks for requried fields.
+        ArgumentNullException.ThrowIfNull(so);
+        so.TxnID.ThrowIfNullOrWhiteSpace();
+        so.EditSequence.ThrowIfNullOrWhiteSpace();
+
+        return new SalesOrderMod()
+        {
+            TxnID = so.TxnID,
+            EditSequence = so.EditSequence,
+            CustomerRef = so.CustomerRef,
+            ClassRef = so.ClassRef,
+            TemplateRef = so.TemplateRef,
+            TxnDate = so.TxnDate,
+            RefNumber = so.RefNumber,
+            BillAddress = so.BillAddress,
+            ShipAddress = so.ShipAddress,
+            PONumber = so.PONumber,
+            TermsRef = so.TermsRef,
+            DueDate = so.DueDate,
+            SalesRepRef = so.SalesRepRef,
+            FOB = so.FOB,
+            ShipDate = so.ShipDate,
+            ShipMethodRef = so.ShipMethodRef,
+            ItemSalesTaxRef = so.ItemSalesTaxRef,
+            IsManuallyClosed = so.IsManuallyClosed,
+            Memo = so.Memo,
+            CustomerMsgRef = so.CustomerMsgRef,
+            IsToBePrinted = so.IsToBePrinted,
+            IsToBeEmailed = so.IsToBeEmailed,
+            IsTaxIncluded = so.IsTaxIncluded,
+            CustomerSalesTaxCodeRef = so.CustomerSalesTaxCodeRef,
+            Other = so.Other,
+            ExchangeRate = so.ExchangeRate,
+            SalesOrderLineMod = so.SalesOrderLines?.Select(l => l.ToMod()).ToList(),
+        };
     }
 }

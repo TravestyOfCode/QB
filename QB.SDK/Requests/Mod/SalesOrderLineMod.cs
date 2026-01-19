@@ -48,6 +48,42 @@ public class SalesOrderLineMod : SalesOrderLineModBase
             .Append(Other1)
             .Append(Other2);
     }
+
+    /// <summary>
+    /// Converts a SalesOrderLineBase into a Mod request line.
+    /// </summary>
+    /// <param name="line">The SalesOrderLineBase to convert.</param>
+    /// <returns>Either a SalesOrderLineMod or SalesOrderLineGroupMod depending on the type of line.</returns>
+    public override SalesOrderLineModBase ToMod(SalesOrderLineBase lineBase)
+    {
+        var line = lineBase as SalesOrderLine ?? throw new InvalidOperationException("Unable to convert SalesOrderLineBase to SalesOrderLine.");
+
+        line.TxnLineID.ThrowIfNullOrWhiteSpace();
+
+        return new SalesOrderLineMod()
+        {
+            ItemRef = line.ItemRef,
+            Desc = line.Desc,
+            OverrideUOMSetRef = line.OverrideUOMSetRef,
+            Rate = line.Rate,
+            RatePercent = line.RatePercent,
+            //PriceLevelRef = line.PriceLevelRef,
+            ClassRef = line.ClassRef,
+            Amount = line.Amount,
+            //OptionForPriceRuleConflict = line.OptionForPriceRuleConflict,
+            InventorySiteRef = line.InventorySiteRef,
+            InventorySiteLocationRef = line.InventorySiteLocationRef,
+            SerialNumber = line.SerialNumber,
+            LotNumber = line.LotNumber,
+            SalesTaxCodeRef = line.SalesTaxCodeRef,
+            IsManuallyClosed = line.IsManuallyClosed,
+            Other1 = line.Other1,
+            Other2 = line.Other2,
+            TxnLineID = line.TxnLineID,
+            Quantity = line.Quantity,
+            UnitOfMeasure = line.UnitOfMeasure
+        };
+    }
 }
 
 internal static class SalesOrderLineModExtensions
