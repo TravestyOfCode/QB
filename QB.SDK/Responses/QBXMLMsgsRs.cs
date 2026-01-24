@@ -10,5 +10,5 @@ public class QBXMLMsgsRs
     [XmlElement(typeof(SalesOrderAddRs))]
     [XmlElement(typeof(SalesOrderModRs))]
     [XmlElement(typeof(SalesOrderQueryRs))]
-    public List<QBResponse>? Results { get; set; }
+    public List<QBResponse> Results { get; set; } = [];
 }
