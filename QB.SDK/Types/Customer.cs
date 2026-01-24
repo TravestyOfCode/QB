@@ -1,12 +1,7 @@
 ﻿namespace QB.SDK;
 
-public class Customer
+public class Customer : QBList
 {
-    public string? ListID { get; set; }
-    public DateTime? TimeCreated { get; set; }
-    public DateTime? TimeModified { get; set; }
-    public string? EditSequence { get; set; }
-    public string? Name { get; set; }
     public string? FullName { get; set; }
     public bool? IsActive { get; set; }
     public ListRef? ClassRef { get; set; }

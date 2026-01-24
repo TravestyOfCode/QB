@@ -2,12 +2,8 @@
 
 namespace QB.SDK;
 
-public class SalesOrder
+public class SalesOrder : QBTxn
 {
-    public string? TxnID { get; set; }
-    public DateTime? TimeCreated { get; set; }
-    public DateTime? TimeModified { get; set; }
-    public string? EditSequence { get; set; }
     public int? TxnNumber { get; set; }
     public ListRef? CustomerRef { get; set; }
     public ListRef? ClassRef { get; set; }

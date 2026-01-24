@@ -1,11 +1,7 @@
 ﻿namespace QB.SDK;
 
-public class Bill
+public class Bill : QBTxn
 {
-    public string? TxnID { get; set; }
-    public DateTime? TimeCreated { get; set; }
-    public DateTime? TimeModified { get; set; }
-    public string? EditSequence { get; set; }
     public int? TxnNumber { get; set; }
     public ListRef? VendorRef { get; set; }
     public Address? VendorAddress { get; set; }

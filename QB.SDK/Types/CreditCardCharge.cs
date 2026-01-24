@@ -1,11 +1,7 @@
 ﻿namespace QB.SDK;
 
-public class CreditCardCharge
+public class CreditCardCharge : QBTxn
 {
-    public string? TxnID { get; set; }
-    public DateTime? TimeCreated { get; set; }
-    public DateTime? TimeModified { get; set; }
-    public string? EditSequence { get; set; }
     public int? TxnNumber { get; set; }
     public ListRef? AccountRef { get; set; }
     public ListRef? PayeeEntityRef { get; set; }
