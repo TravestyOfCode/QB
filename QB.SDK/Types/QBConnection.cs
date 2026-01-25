@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using QBXMLRP2Lib;
 using System.IO;
+using System.Linq;
 
 namespace QB.SDK;
 
@@ -21,11 +22,10 @@ public class QBConnection(ILogger<QBConnection> logger) : IDisposable
     public string AppID { get; set; } = "QBSDK";
 
     /// <summary>
-    /// Sends the requests to the QBSDK and creates a QBXML Message Response
+    /// Sends the requests to the QBSDK and processes the response.
     /// </summary>
     /// <param name="request">The QBXML Requests to process.</param>
-    /// <returns>A QBXML Response.</returns>
-    public QBXMLResponse ProcessRequest(QBXMLRequest request)
+    public void ProcessRequest(QBXMLRequest request)
     {
         Open();
 
@@ -34,8 +34,23 @@ public class QBConnection(ILogger<QBConnection> logger) : IDisposable
         // Deserialize the result into an QBXMLResponse
         using var reader = new StringReader(result);
         var deSer = new XmlSerializer(typeof(QBXMLResponse));
-        // The deserializer will either return an object or throw.
-        return (QBXMLResponse)deSer.Deserialize(reader)!;
+        var response = (QBXMLResponse?)deSer.Deserialize(reader) ?? throw new InvalidOperationException("Unable to parse response from QuickBooks.");
+
+        foreach (var rq in request.QBXMLMsgsRq.Requests)
+        {
+            var rs = response.QBXMLMsgsRs.Results.Where(r => r.RequestID == rq.requestID).Single();
+            rq.ParseResponse(rs);
+        }
+    }
+
+    /// <summary>
+    /// Sends the request to the QBSDK and processes the response.
+    /// </summary>
+    /// <param name="request">The QB Request to process.</param>
+    public void ProcessRequest(QBRequest request)
+    {
+        var qbxml = new QBXMLRequest([request]);
+        ProcessRequest(qbxml);
     }
 
     /// <summary>
