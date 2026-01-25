@@ -16,6 +16,16 @@ public class ARRefundCreditCardAdd : QBRequest
     public float? ExchangeRate { get; set; }
     public string? ExternalGUID { get; set; }
     public List<RefundAppliedToTxnAdd>? RefundAppliedToTxnAdd { get; set; }
+    public ARRefundCreditCard? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as ARRefundCreditCardAddRs ?? throw new InvalidOperationException("Unable to parse response as ARRefundCreditCardAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.ARRefundCreditCardRet;
+    }
 
     public override XElement ToQBXML()
     {

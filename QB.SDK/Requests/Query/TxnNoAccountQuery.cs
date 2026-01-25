@@ -266,4 +266,7 @@ public abstract class TxnNoAccountQuery : QueryRq, IQBXML
     /// </summary>
     public List<string>? OwnerID { get; set; }
 
+    public int? ReturnedCount { get; protected set; }
+
+    public int? RemainingCount { get; protected set; }
 }

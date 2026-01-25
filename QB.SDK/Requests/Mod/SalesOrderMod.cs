@@ -30,6 +30,16 @@ public class SalesOrderMod : QBRequest
     public string? Other { get; set; }
     public float? ExchangeRate { get; set; }
     public List<SalesOrderLineModBase>? SalesOrderLineMod { get; set; }
+    public SalesOrder? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as SalesOrderModRs ?? throw new InvalidOperationException("Unable to parse response as SalesOrderModRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.SalesOrderRet;
+    }
 
     public override XElement ToQBXML()
     {

@@ -29,6 +29,16 @@ public class SalesOrderAdd : QBRequest
     public float? ExchangeRate { get; set; }
     public string? ExternalGUID { get; set; }
     public List<SalesOrderLineAddBase>? SalesOrderLineAdd { get; set; }
+    public SalesOrder? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as SalesOrderAddRs ?? throw new InvalidOperationException("Unable to parse response as SalesOrderAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.SalesOrderRet;
+    }
 
     public override XElement ToQBXML()
     {

@@ -2,9 +2,14 @@
 
 public class QueryRs<T> : QBResponse
 {
-    public int? RemainingCount { get; protected set; }
+    [XmlAttribute("iteratorID")]
+    public string? IteratorID { get; set; }
 
-    public int? ReturnedCount { get; protected set; }
+    [XmlAttribute("iteratorRemainingCount")]
+    public string? RemainingCount { get; protected set; }
+
+    [XmlAttribute("retCount")]
+    public string? ReturnedCount { get; protected set; }
 
     public List<T>? Results { get; protected set; }
 }

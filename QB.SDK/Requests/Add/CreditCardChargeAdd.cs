@@ -14,6 +14,16 @@ public class CreditCardChargeAdd : QBRequest
     public string? ExternalGUID { get; set; }
     public List<ExpenseLineAdd>? ExpenseLines { get; set; }
     public List<ItemLineAddBase>? ItemLines { get; set; }
+    public CreditCardCharge? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as CreditCardChargeAddRs ?? throw new InvalidOperationException("Unable to parse response as CreditCardChargeAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.CreditCardChargeRet;
+    }
 
     public override XElement ToQBXML()
     {

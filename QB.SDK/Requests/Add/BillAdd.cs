@@ -18,6 +18,16 @@ public class BillAdd : QBRequest
     public List<string>? LinkToTxnID { get; set; }
     public List<ExpenseLineAdd>? ExpenseLines { get; set; }
     public List<ItemLineAddBase>? ItemLines { get; set; }
+    public Bill? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as BillAddRs ?? throw new InvalidOperationException("Unable to parse response as BillAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.BillRet;
+    }
 
     public override XElement ToQBXML()
     {

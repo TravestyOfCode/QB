@@ -12,6 +12,16 @@ public class InventoryAdjustmentAdd : QBRequest
     public string? Memo { get; set; }
     public string? ExternalGUID { get; set; }
     public List<InventoryAdjustmentLineAdd>? InventoryAdjustmentLineAdd { get; set; }
+    public InventoryAdjustment? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as InventoryAdjustmentAddRs ?? throw new InvalidOperationException("Unable to parse response as InventoryAdjustmentAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.InventoryAdjustmentRet;
+    }
 
     public override XElement ToQBXML()
     {

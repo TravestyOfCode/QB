@@ -50,6 +50,16 @@ public class CustomerMod : QBRequest
     public ListRef? PriceLevelRef { get; set; }
     public string? TaxRegistrationNumber { get; set; }
     public ListRef? CurrencyRef { get; set; }
+    public Customer? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as CustomerModRs ?? throw new InvalidOperationException("Unable to parse response as CustomerModRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.CustomerRet;
+    }
 
     public override XElement ToQBXML()
     {

@@ -4,9 +4,17 @@ public abstract class QBRequest
 {
     public readonly string requestID = Guid.NewGuid().ToString();
 
+    public string? StatusCode { get; set; }
+
+    public string? StatusSeverity { get; set; }
+
+    public string? StatusMessage { get; set; }
+
     public List<string>? IncludeRetElement { get; set; }
 
     public abstract XElement ToQBXML();
+
+    internal abstract void ParseResponse(QBResponse response);
 }
 
 internal static class QBRequestExtensions

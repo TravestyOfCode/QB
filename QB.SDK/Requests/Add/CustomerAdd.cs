@@ -50,6 +50,16 @@ public class CustomerAdd : QBRequest
     public string? ExternalGUID { get; set; }
     public string? TaxRegistrationNumber { get; set; }
     public ListRef? CurrencyRef { get; set; }
+    public Customer? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as CustomerAddRs ?? throw new InvalidOperationException("Unable to parse response as CustomerAddRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.CustomerRet;
+    }
 
     public override XElement ToQBXML()
     {

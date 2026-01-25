@@ -4,6 +4,20 @@ namespace QB.SDK;
 
 public class SalesOrderQuery : TxnNoAccountQuery
 {
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as SalesOrderQueryRs ?? throw new InvalidOperationException("Unable to parse response as SalesOrderQueryRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        iteratorID = rs.IteratorID;
+        ReturnedCount = int.TryParse(rs.ReturnedCount, out var retCount) ? retCount : -1;
+        RemainingCount = int.TryParse(rs.RemainingCount, out var remCount) ? remCount : -1;
+        Results = rs.Results;
+    }
+
+    public List<SalesOrder>? Results { get; private set; }
+
     /// <summary>
     /// Converts the object to a XElement represenation according to the QBXML specification.
     /// </summary>

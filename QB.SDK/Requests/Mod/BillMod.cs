@@ -2,6 +2,17 @@
 
 public class BillMod : QBRequest, IQBXML
 {
+    public Bill? Results { get; private set; }
+
+    internal override void ParseResponse(QBResponse response)
+    {
+        var rs = response as BillModRs ?? throw new InvalidOperationException("Unable to parse response as BillModRs.");
+        StatusCode = rs.StatusCode;
+        StatusMessage = rs.StatusMessage;
+        StatusSeverity = rs.StatusSeverity;
+        Results = rs.BillRet;
+    }
+
     /// <summary>
     /// QuickBooks generates a unique TxnID for each transaction that is added to QuickBooks. 
     /// </summary>
