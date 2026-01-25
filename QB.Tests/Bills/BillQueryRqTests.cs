@@ -163,4 +163,24 @@ public class BillQueryRqTests(QBXMLSchemaFixture fixture) : IClassFixture<QBXMLS
         // Assert
         Assert.Equal<object>(string.Empty, validationErrors);
     }
+
+    [Fact]
+    public void SuccesfullyQueriesQB()
+    {
+        // Arrange
+        var rq = new BillQuery()
+        {
+            MaxReturned = 10,
+            metaData = MetaData.MetaDataAndResponseData
+        };
+        var qbConnection = new QBConnection(new Microsoft.Extensions.Logging.Abstractions.NullLogger<QBConnection>());
+
+        // Act
+        qbConnection.ProcessRequest(rq);
+
+        // Assert
+        Assert.Equal("0", rq.StatusCode);
+        Assert.Equal(10, rq.ReturnedCount);
+        Assert.NotNull(rq.Results);
+    }
 }
