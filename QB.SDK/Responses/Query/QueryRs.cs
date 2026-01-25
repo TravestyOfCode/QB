@@ -6,10 +6,10 @@ public class QueryRs<T> : QBResponse
     public string? IteratorID { get; set; }
 
     [XmlAttribute("iteratorRemainingCount")]
-    public string? RemainingCount { get; protected set; }
+    public string? RemainingCount { get; set; }
 
     [XmlAttribute("retCount")]
-    public string? ReturnedCount { get; protected set; }
+    public string? ReturnedCount { get; set; }
 
-    public List<T>? Results { get; protected set; }
+    public List<T>? Results { get; set; }
 }
