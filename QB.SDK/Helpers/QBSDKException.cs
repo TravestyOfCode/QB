@@ -169,6 +169,9 @@ public class QBSDKException(string? statusCode, string? message = null) : Invali
     [SetsRequiredMembers]
     public QBSDKException(QBResponse response) : this(response.StatusCode, response.StatusMessage) { }
 
+    [SetsRequiredMembers]
+    public QBSDKException(QBRequest request) : this(request.StatusCode, request.StatusMessage) { }
+
     private static string ParseStatus(string? statusCode, string? statusMessage)
     {
         statusCode ??= "-1";
