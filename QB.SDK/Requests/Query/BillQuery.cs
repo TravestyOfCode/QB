@@ -101,22 +101,20 @@ public static class BillQueryExtensions
     public static Bill? FindBillsByRefNumber(this QBConnection qbConnection, string refNumber, bool isCaseSensitive = true)
     {
         // Generate the request using the static constructor
-        var request = new QBXMLRequest([BillQuery.ByRefNumber(refNumber, isCaseSensitive)]);
+        var request = BillQuery.ByRefNumber(refNumber, isCaseSensitive);
 
         // Process the request.
-        var response = qbConnection.ProcessRequest(request);
+        qbConnection.ProcessRequest(request);
 
         // Check if we have a successful response.
-        var soResponse = response.QBXMLMsgsRs?.Results?[0] as BillQueryRs ?? throw new QBSDKException();
-
         // Found result: "0", Not Found result: "500"
-        if (soResponse.StatusCode == "0" || soResponse.StatusCode == "500")
+        if (request.StatusCode == "0" || request.StatusCode == "500")
         {
-            return soResponse.Results?[0];
+            return request.Results?[0];
         }
 
         // Some other error occured.
-        throw new QBSDKException(soResponse);
+        throw new QBSDKException(request);
     }
 
     /// <summary>
@@ -129,22 +127,20 @@ public static class BillQueryExtensions
     public static List<Bill>? FindBillsByRefNumbers(this QBConnection qbConnection, IEnumerable<string> refNumbers, bool isCaseSensitive = true)
     {
         // Generate the request using the static constructor
-        var request = new QBXMLRequest([BillQuery.ByRefNumbers(refNumbers, isCaseSensitive)]);
+        var request = BillQuery.ByRefNumbers(refNumbers, isCaseSensitive);
 
         // Process the request.
-        var response = qbConnection.ProcessRequest(request);
+        qbConnection.ProcessRequest(request);
 
         // Check if we have a successful response.
-        var soResponse = response.QBXMLMsgsRs?.Results?[0] as BillQueryRs ?? throw new QBSDKException();
-
         // Found result: "0", Not Found result: "500"
-        if (soResponse.StatusCode == "0" || soResponse.StatusCode == "500")
+        if (request.StatusCode == "0" || request.StatusCode == "500")
         {
-            return soResponse.Results;
+            return request.Results;
         }
 
         // Some other error occured.
-        throw new QBSDKException(soResponse);
+        throw new QBSDKException(request);
     }
 
     /// <summary>
@@ -159,22 +155,20 @@ public static class BillQueryExtensions
         ArgumentException.ThrowIfNullOrWhiteSpace(nameof(txnID));
 
         // Generate the request using the static constructor.
-        var request = new QBXMLRequest([BillQuery.ByTxnID(txnID)]);
+        var request = BillQuery.ByTxnID(txnID);
 
         // Process the request.
-        var response = qbConnection.ProcessRequest(request);
+        qbConnection.ProcessRequest(request);
 
         // Check if we have a successful response.
-        var soResponse = response.QBXMLMsgsRs?.Results?[0] as BillQueryRs ?? throw new QBSDKException();
-
         // Found result: "0"
-        if (soResponse.StatusCode == "0")
+        if (request.StatusCode == "0")
         {
-            return soResponse.Results![0];
+            return request.Results![0];
         }
 
         // Some error occured, including Not Found "500"
-        throw new QBSDKException(soResponse);
+        throw new QBSDKException(request);
     }
 
     /// <summary>
@@ -189,21 +183,19 @@ public static class BillQueryExtensions
         ArgumentException.ThrowIfNullOrWhiteSpace(nameof(refNumber));
 
         // Generate the request using the static constructor.
-        var request = new QBXMLRequest([BillQuery.ByRefNumber(refNumber)]);
+        var request = BillQuery.ByRefNumber(refNumber);
 
         // Process the request.
-        var response = qbConnection.ProcessRequest(request);
+        qbConnection.ProcessRequest(request);
 
         // Check if we have a successful response.
-        var soResponse = response.QBXMLMsgsRs?.Results?[0] as BillQueryRs ?? throw new QBSDKException();
-
         // Found result: "0"
-        if (soResponse.StatusCode == "0")
+        if (request.StatusCode == "0")
         {
-            return soResponse.Results![0];
+            return request.Results![0];
         }
 
         // Some error occured, including Not Found "500"
-        throw new QBSDKException(soResponse);
+        throw new QBSDKException(request);
     }
 }
