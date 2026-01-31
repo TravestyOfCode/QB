@@ -2,7 +2,7 @@
 
 public class QBXMLMsgsRs
 {
-    [XmlElement(typeof(CreditCardChargeAddRs))]
+    [XmlElement(typeof(AccountAddRs))]
     [XmlElement(typeof(BillAddRs))]
     [XmlElement(typeof(BillModRs))]
     [XmlElement(typeof(BillQueryRs))]
