@@ -8,6 +8,7 @@ public class QBXMLMsgsRs
     [XmlElement(typeof(BillQueryRs))]
     [XmlElement(typeof(BillPaymentCheckAddRs))]
     [XmlElement(typeof(BillPaymentCreditCardAddRs))]
+    [XmlElement(typeof(CreditCardChargeAddRs))]
     [XmlElement(typeof(InventoryAdjustmentAddRs))]
     [XmlElement(typeof(SalesOrderAddRs))]
     [XmlElement(typeof(SalesOrderModRs))]
