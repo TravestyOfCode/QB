@@ -6,6 +6,7 @@ public class QBXMLMsgsRs
     [XmlElement(typeof(BillAddRs))]
     [XmlElement(typeof(BillModRs))]
     [XmlElement(typeof(BillQueryRs))]
+    [XmlElement(typeof(BillPaymentCheckAddRs))]
     [XmlElement(typeof(InventoryAdjustmentAddRs))]
     [XmlElement(typeof(SalesOrderAddRs))]
     [XmlElement(typeof(SalesOrderModRs))]
